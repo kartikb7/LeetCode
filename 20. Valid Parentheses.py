@@ -1,4 +1,7 @@
 def search_closing(string, i, close):
+    """
+    Function to search for closing parenthesis
+    """
     found = False
     while not found:
         if string[i] == close:
