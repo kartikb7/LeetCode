@@ -32,5 +32,4 @@ class Solution(object):
                 new_num %= 10
             result = str(new_num) + result
         else:
-
-        return result
+    return result
