@@ -1,43 +1,15 @@
-def search_closing(string, i, close):
-    """
-    Function to search for closing parenthesis
-    """
-    found = False
-    while not found:
-        if string[i] == close:
-            return True
-        if string[i] == '(':
-            if search_closing(string, i + 1, ')'):
-                continue
-            else:
-                return False
-        if string[i] == '{':
-            if search_closing(string, i + 1, '}'):
-                continue
-            else:
-                return False
-        if string[i] == '[':
-            if search_closing(string, i + 1, ']'):
-                continue
-            else:
-                return False
-
-
-class Solution(object):
-
-    def isValid(self, s):
-        """
-        :type s: str
-        :rtype: bool
-        """
-        valid = True
-
-        if len(s) != 0:
-            if s[0] == '(':
-                valid = search_closing(s, 1, ')')
-            if s[0] == '{':
-                valid = search_closing(s, 1, '}')
-            if s[0] == '[':
-                valid = search_closing(s, 1, ']')
-
-        return valid
+class Solution:
+    def isValid(self, s: str) -> bool:
+        stack = []
+        for i in range(len(s)):
+            if s[i] in '{([':
+                stack.append(s[i])
+            elif s[i] in '})]':
+                temp = stack.pop() if stack else 'a'
+                if temp != '(' and s[i] == ')':
+                    return False
+                elif temp != '{' and s[i] == '}':
+                    return False
+                elif temp != '[' and s[i] == ']':
+                    return False
+        return not stack
